@@ -1,8 +1,8 @@
 package dev.earthlings.backend.javalin;
 
-import dev.earthlings.backend.dao.Dao;
-import dev.earthlings.backend.dao.InMemoryDao;
-import dev.earthlings.backend.model.GarbageCan;
+import dev.earthlings.backend.database.dao.Dao;
+import dev.earthlings.backend.database.dao.InMemoryDao;
+import dev.earthlings.backend.database.model.GarbageCan;
 import io.javalin.Javalin;
 
 public class StartupContext {

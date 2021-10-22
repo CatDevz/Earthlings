@@ -1,4 +1,4 @@
-package dev.earthlings.backend.dao;
+package dev.earthlings.backend.database.dao;
 
 import java.util.List;
 import java.util.Optional;
