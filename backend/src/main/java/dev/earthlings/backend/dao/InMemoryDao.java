@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.replaceAll;
 
-public class InMemoryDAO<T> implements Dao<T> {
+public class InMemoryDao<T> implements Dao<T> {
 
     private List<T> storage = new ArrayList<>();
 
