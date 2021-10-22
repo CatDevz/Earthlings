@@ -6,9 +6,12 @@ import dev.earthlings.backend.dto.GarbageCanCreateDto;
 import io.javalin.apibuilder.CrudHandler;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
+import io.javalin.http.NotFoundResponse;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -37,23 +40,40 @@ public class GarbageCanController implements CrudHandler {
     }
 
     @Override
-    public void delete(@NotNull Context context, @NotNull String s) {
+    public void delete(@NotNull Context context, @NotNull String uuid) {
+        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(garbageCan -> garbageCan.getUuid().equals(uuid));
 
+        if (garbageCanOptional.isEmpty()) throw new NotFoundResponse();
+
+        GarbageCan garbageCan = garbageCanOptional.get();
+        garbageCanDao.remove(garbageCan);
+
+        context.status(201);
     }
 
     @Override
     public void getAll(@NotNull Context context) {
+        List<GarbageCan> garbageCanList = garbageCanDao.getAll();
 
+        context.status(200);
+        context.json(garbageCanList);
     }
 
     @Override
-    public void getOne(@NotNull Context context, @NotNull String s) {
+    public void getOne(@NotNull Context context, @NotNull String uuid) {
+        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(garbageCan -> garbageCan.getUuid().equals(uuid));
 
+        if (garbageCanOptional.isEmpty()) throw new NotFoundResponse();
+
+        GarbageCan garbageCan = garbageCanOptional.get();
+
+        context.status(200);
+        context.json(garbageCan);
     }
 
     @Override
-    public void update(@NotNull Context context, @NotNull String s) {
-
+    public void update(@NotNull Context context, @NotNull String uuid) {
+        // TODO: Add DTO & functionality
     }
 
 }
