@@ -2,7 +2,7 @@ package dev.earthlings.backend.controllers;
 
 import dev.earthlings.backend.database.dao.Dao;
 import dev.earthlings.backend.database.model.GarbageCan;
-import dev.earthlings.backend.dto.GarbageCanCreateDTO;
+import dev.earthlings.backend.dto.GarbageCanCreateDto;
 import io.javalin.apibuilder.CrudHandler;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
@@ -18,15 +18,15 @@ public class GarbageCanController implements CrudHandler {
 
     @Override
     public void create(@NotNull Context context) {
-        GarbageCanCreateDTO garbageCanCreateDTO = context.bodyAsClass(GarbageCanCreateDTO.class);
+        GarbageCanCreateDto garbageCanCreateDto = context.bodyAsClass(GarbageCanCreateDto.class);
 
-        if (garbageCanCreateDTO == null) throw new BadRequestResponse();
+        if (garbageCanCreateDto == null) throw new BadRequestResponse();
 
         GarbageCan garbageCan = new GarbageCan(
                 UUID.randomUUID().toString(),
-                garbageCanCreateDTO.getLatitude(),
-                garbageCanCreateDTO.getLongitude(),
-                garbageCanCreateDTO.getPhotoBase64(),
+                garbageCanCreateDto.getLatitude(),
+                garbageCanCreateDto.getLongitude(),
+                garbageCanCreateDto.getPhotoBase64(),
                 "TODO", "TODO"
         );
 

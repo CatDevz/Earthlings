@@ -3,7 +3,7 @@ package dev.earthlings.backend.dto;
 import lombok.Data;
 
 @Data
-public class GarbageCanCreateDTO {
+public class GarbageCanCreateDto {
 
     private double latitude;
     private double longitude;
