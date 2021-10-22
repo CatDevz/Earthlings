@@ -3,6 +3,7 @@ package dev.earthlings.backend.controllers;
 import dev.earthlings.backend.database.dao.Dao;
 import dev.earthlings.backend.database.model.GarbageCan;
 import dev.earthlings.backend.dto.GarbageCanCreateDto;
+import dev.earthlings.backend.storage.FileStorage;
 import io.javalin.apibuilder.CrudHandler;
 import io.javalin.http.BadRequestResponse;
 import io.javalin.http.Context;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GarbageCanController implements CrudHandler {
 
+    private final FileStorage garbageCanImageStorage;
     private final Dao<GarbageCan> garbageCanDao;
 
     @Override
@@ -75,5 +77,7 @@ public class GarbageCanController implements CrudHandler {
     public void update(@NotNull Context context, @NotNull String uuid) {
         // TODO: Add DTO & functionality
     }
+
+    // TODO: Add url endpoint to get the image
 
 }
