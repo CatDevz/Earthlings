@@ -5,10 +5,13 @@ import lombok.Data;
 @Data
 public class GarbageCan {
 
-    private String latitude;
-    private String longitude;
-    private String createdBy;
-    private String lastUpdated;
-    private String createdTime;
+    private Double latitude;
+    private Double longitude;
+    private String address;
+
     private String photoUrl;
+
+    private String createdAt;
+    private String updatedAt;
+
 }
