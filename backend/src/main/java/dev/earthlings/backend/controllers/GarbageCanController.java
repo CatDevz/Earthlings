@@ -30,7 +30,7 @@ public class GarbageCanController {
 
     public void getOne(@NotNull Context context) {
         String uuid = context.pathParam("uuid");
-        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(garbageCan -> garbageCan.getUuid().equals(uuid));
+        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(uuid);
 
         if (garbageCanOptional.isEmpty()) throw new NotFoundResponse();
 
@@ -75,7 +75,7 @@ public class GarbageCanController {
 
     public void delete(@NotNull Context context) {
         String uuid = context.pathParam("uuid");
-        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(garbageCan -> garbageCan.getUuid().equals(uuid));
+        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(uuid);
 
         if (garbageCanOptional.isEmpty()) throw new NotFoundResponse();
 
@@ -91,7 +91,7 @@ public class GarbageCanController {
 
     public void getImage(@NotNull Context context) {
         String uuid = context.pathParam("uuid");
-        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(garbageCan -> garbageCan.getUuid().equals(uuid));
+        Optional<GarbageCan> garbageCanOptional = garbageCanDao.find(uuid);
 
         if (garbageCanOptional.isEmpty()) throw new NotFoundResponse();
 

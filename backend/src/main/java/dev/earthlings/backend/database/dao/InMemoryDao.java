@@ -1,5 +1,7 @@
 package dev.earthlings.backend.database.dao;
 
+import dev.earthlings.backend.database.model.Model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +9,7 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.replaceAll;
 
-public class InMemoryDao<T> implements Dao<T> {
+public class InMemoryDao<T extends Model> implements Dao<T> {
 
     private List<T> storage = new ArrayList<>();
 
@@ -17,8 +19,8 @@ public class InMemoryDao<T> implements Dao<T> {
     }
 
     @Override
-    public void update(Predicate<T> predicate, T t) {
-        Optional<T> exists = storage.stream().filter(predicate).findFirst();
+    public void update(String uuid, T t) {
+        Optional<T> exists = find(uuid);
         exists.ifPresent(value -> replaceAll(storage, value, t));
     }
 
@@ -28,8 +30,8 @@ public class InMemoryDao<T> implements Dao<T> {
     }
 
     @Override
-    public Optional<T> find(Predicate<T> predicate) {
-        return storage.stream().filter(predicate).findFirst();
+    public Optional<T> find(String uuid) {
+        return storage.stream().filter(t -> t.getUuid().equals(uuid)).findFirst();
     }
 
     @Override

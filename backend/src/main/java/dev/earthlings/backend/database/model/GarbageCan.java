@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class GarbageCan {
+public class GarbageCan implements Model {
 
     private String uuid;
 
