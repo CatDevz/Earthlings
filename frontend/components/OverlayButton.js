@@ -7,7 +7,7 @@ const OverlayButton = ({ children, size = 60, ...props }) => {
       backgroundColor: "#fff",
       marginTop: 10,
 
-      borderRadius: 10,
+      borderRadius: 50,
       borderColor: "#000000",
       borderWidth: 1,
     },

@@ -1,31 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 import * as Location from "expo-location";
 import MapPage from "./pages/MapPage";
-import { PageContainer } from "./lib/contexts/pageContext";
+import { StatusBar } from "expo-status-bar";
+import { BackButton, NativeRouter, Route, useLocation } from "react-router-native";
+import CreatePage from "./pages/CreatePage";
 
 export default function App() {
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [hasLocationPerms, setHasLocationPerms] = useState(null);
 
-  useEffect(
-    () =>
-      (async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-          setErrorMsg("Permission to access location was denied");
-          return;
-        }
-      })(),
-    [],
-  );
+  const requestLocationPerms = () => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      setHasLocationPerms(status === "granted");
+    })();
+  };
 
-  if (errorMsg) {
+  useEffect(() => {
+    requestLocationPerms();
+  }, []);
+
+  // Requesting location permissions if they haven't already been granted
+  if (!hasLocationPerms) {
     return (
-      <View>
-        <Text>{errorMsg}</Text>
+      <View style={localStyles.container}>
+        <Text>This app requires location permissions to function, please grant them!</Text>
+        <Button title='Grant' onPress={requestLocationPerms} />
       </View>
     );
   }
 
-  return <PageContainer defaultPage={<MapPage />} />;
+  return (
+    <NativeRouter>
+      <BackButton>
+        <View style={localStyles.container}>
+          <StatusBar style='auto' />
+
+          <Route exact path='/' component={MapPage} />
+          <Route exact path='/create' component={CreatePage} />
+        </View>
+      </BackButton>
+    </NativeRouter>
+  );
 }
+
+const localStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
