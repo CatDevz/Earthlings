@@ -26,7 +26,7 @@ public class StartupContext {
         // Defining our routes
         app.routes(() -> {
             path("cans", () -> {
-                crud(garbageCanController);
+                crud("{uuid}", garbageCanController);
             });
         });
     }
