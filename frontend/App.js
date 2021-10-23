@@ -1,21 +1,31 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text } from "react-native";
+import * as Location from "expo-location";
+import MapPage from "./pages/MapPage";
+import { PageContainer } from "./lib/contexts/pageContext";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Hello Earthlings!</Text>
-      <StatusBar style='auto' />
-    </View>
-  );
-}
+  const [errorMsg, setErrorMsg] = useState(null);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  useEffect(
+    () =>
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+          setErrorMsg("Permission to access location was denied");
+          return;
+        }
+      })(),
+    [],
+  );
+
+  if (errorMsg) {
+    return (
+      <View>
+        <Text>{errorMsg}</Text>
+      </View>
+    );
+  }
+
+  return <PageContainer defaultPage={<MapPage />} />;
+}
