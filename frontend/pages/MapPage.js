@@ -1,18 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Image, Dimensions } from "react-native";
-import * as Location from "expo-location";
 import MapView, { Marker } from "react-native-maps";
 import OverlayButton from "../components/OverlayButton";
 import { StyleSheet } from "react-native";
 import { useHistory } from "react-router-native";
 import api from "../lib/api";
-
-const getLocationAsLatLong = async () => {
-  const location = await Location.getCurrentPositionAsync({});
-  const latitude = location.coords.latitude;
-  const longitude = location.coords.longitude;
-  return { latitude, longitude };
-};
+import { getLocationAsLatLongAsync } from "../lib/location";
 
 const MapPage = () => {
   const history = useHistory();
@@ -26,7 +19,7 @@ const MapPage = () => {
     if (mapRef.current == null) return;
 
     mapRef.current.setCamera({
-      center: await getLocationAsLatLong(),
+      center: await getLocationAsLatLongAsync(),
       heading: 0.0,
       pitch: 0.0,
       zoom: 15,
@@ -41,7 +34,7 @@ const MapPage = () => {
 
   // Called when the user presses the button to
   // add a new trash can onto the map
-  const handleAddPress = () => {
+  const handleAddPress = async () => {
     history.push("/create");
   };
 
@@ -51,7 +44,7 @@ const MapPage = () => {
     if (mapRef.current == null) return;
 
     mapRef.current.animateCamera({
-      center: await getLocationAsLatLong(),
+      center: await getLocationAsLatLongAsync(),
       heading: 0.0,
       pitch: 0.0,
       zoom: 15,
@@ -60,6 +53,10 @@ const MapPage = () => {
 
   const handleRegionChange = async (region) => {
     // TODO: Load new trash cans
+  };
+
+  const handleCanTap = async () => {
+    // TODO: open drawer with info when a trash can is clicked on
   };
 
   return (
@@ -71,7 +68,7 @@ const MapPage = () => {
         userLocationUpdateInterval={1000}
         showsMyLocationButton={false}
         rotateEnabled={false}
-        userLocationPriority='balanced'
+        userLocationPriority='high'
         onRegionChangeComplete={handleRegionChange}
       >
         {cans.map((can) => (

@@ -18,6 +18,7 @@ public class StartupContext {
         Javalin app = Javalin.create((config) -> {
             config.enableCorsForAllOrigins();
             config.defaultContentType = "application/json";
+            config.maxRequestSize = 20_000_000L;
         }).start(8080);
 
         FileStorage garbageCanImageStorage = new LocalFileStorage(new File("tmp/images"));
