@@ -15,7 +15,10 @@ import java.io.File;
 public class StartupContext {
 
     public void start() {
-        Javalin app = Javalin.create().start(8080);
+        Javalin app = Javalin.create((config) -> {
+            config.enableCorsForAllOrigins();
+            config.defaultContentType = "application/json";
+        }).start(8080);
 
         FileStorage garbageCanImageStorage = new LocalFileStorage(new File("tmp/images"));
         Dao<GarbageCan> garbageCanDao = new InMemoryDao<>();

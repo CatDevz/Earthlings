@@ -79,6 +79,10 @@ public class GarbageCanController {
         GarbageCan garbageCan = garbageCanOptional.get();
         garbageCanDao.remove(garbageCan);
 
+        try {
+            garbageCanImageStorage.delete(garbageCan.getUuid() + ".jpg");
+        } catch (IOException ignored) {}
+
         context.status(201);
     }
 
@@ -96,7 +100,7 @@ public class GarbageCanController {
             context.result(image);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new InternalServerErrorResponse("IOException");
+            throw new InternalServerErrorResponse("Failed to read image");
         }
     }
 
