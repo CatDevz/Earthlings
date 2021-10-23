@@ -1,13 +1,17 @@
 package dev.earthlings.backend.storage;
 
-import lombok.RequiredArgsConstructor;
-
 import java.io.*;
 
-@RequiredArgsConstructor
 public class LocalFileStorage implements FileStorage {
 
     private final File baseDirectory;
+
+    public LocalFileStorage(File baseDirectory) {
+        // Creating the base directory if it does not already exist
+        if (!baseDirectory.exists()) baseDirectory.mkdirs();
+
+        this.baseDirectory = baseDirectory;
+    }
 
     @Override
     public void add(String name, byte[] bytes) throws IOException {

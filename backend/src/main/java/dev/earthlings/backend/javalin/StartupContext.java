@@ -17,7 +17,7 @@ public class StartupContext {
     public void start() {
         Javalin app = Javalin.create().start(8080);
 
-        FileStorage garbageCanImageStorage = new LocalFileStorage(new File("images"));
+        FileStorage garbageCanImageStorage = new LocalFileStorage(new File("tmp/images"));
         Dao<GarbageCan> garbageCanDao = new InMemoryDao<>();
 
         // Creating our controllers
@@ -26,7 +26,13 @@ public class StartupContext {
         // Defining our routes
         app.routes(() -> {
             path("cans", () -> {
-                crud("{uuid}", garbageCanController);
+                get(garbageCanController::getAll);
+                post(garbageCanController::create);
+                path("{uuid}", () -> {
+                    get(garbageCanController::getOne);
+                    delete(garbageCanController::delete);
+                    get("image", garbageCanController::getImage);
+                });
             });
         });
     }

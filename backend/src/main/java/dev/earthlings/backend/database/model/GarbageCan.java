@@ -12,8 +12,6 @@ public class GarbageCan {
     private double latitude;
     private double longitude;
 
-    private String photoBase64;
-
     private String createdAt;
     private String updatedAt;
 
