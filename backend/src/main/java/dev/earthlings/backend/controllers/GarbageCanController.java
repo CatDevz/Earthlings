@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -47,11 +48,13 @@ public class GarbageCanController {
 
             // Converting the create "form" to a usable database model
             //TODO: Move this into it's own class?
+            String currentTime = LocalDateTime.now().toString();
             GarbageCan garbageCan = new GarbageCan(
                     UUID.randomUUID().toString(),
                     garbageCanCreateDto.getLatitude(),
                     garbageCanCreateDto.getLongitude(),
-                    "TODO", "TODO" // TODO: Get the createdAt and updatedAt
+                    currentTime,
+                    currentTime
             );
 
             // Inserting the database object
