@@ -17,18 +17,22 @@ public class GarbageCanPostgresDao implements Dao<GarbageCan> {
     public GarbageCanPostgresDao(Sql2o sql2o, String tableName) {
         this.sql2o = sql2o;
         this.tableName = tableName;
+
+        createTable();
     }
 
     @Override
     public void insert(GarbageCan t) {
-        String queryString = "TODO";
+        String queryString = String.format("INSERT INTO %s (uuid, latitude, longitude, createdAt, updatedAt) " +
+                "VALUES (:uuid, :latitude, :longitude, :createdAt, :updatedAt)", tableName);
 
-        makeDatabaseCall(queryString, Function.identity());
+        makeDatabaseCall(queryString, query -> query.bind(t));
     }
 
     @Override
     public void update(String uuid, GarbageCan t) {
-        String queryString = "TODO";
+        String queryString = String.format("UPDATE %s SET latitude = :latitude, longitude = :longitude, " +
+                "updatedAt = :updatedAt WHERE uuid = :uuid", tableName);
 
         makeDatabaseCall(queryString, query -> query.bind(t));
     }
@@ -66,6 +70,13 @@ public class GarbageCanPostgresDao implements Dao<GarbageCan> {
             Query query = function.apply(connection.createQuery(queryString));
             query.executeUpdate();
         }
+    }
+
+    private void createTable() {
+        String queryString = String.format("CREATE TABLE IF NOT EXISTS %s (uuid TEXT PRIMARY KEY UNIQUE, " +
+                "DOUBLE latitude, DOUBLE longitude, TEXT createdAt, TEXT updatedAt)", tableName);
+
+        makeDatabaseCall(queryString, Function.identity());
     }
 
 }
