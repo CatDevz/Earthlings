@@ -66,15 +66,19 @@ public class GarbageCanPostgresDao implements Dao<GarbageCan> {
     }
 
     private void makeDatabaseCall(String queryString, Function<Query, Query> function) {
-        try (Connection connection = sql2o.open()) {
+        try {
+            Connection connection = sql2o.open();
+            connection.setRollbackOnException(false);
             Query query = function.apply(connection.createQuery(queryString));
             query.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     private void createTable() {
         String queryString = String.format("CREATE TABLE IF NOT EXISTS %s (uuid TEXT PRIMARY KEY UNIQUE, " +
-                "DOUBLE latitude, DOUBLE longitude, TEXT createdAt, TEXT updatedAt)", tableName);
+                "latitude REAL, longitude REAL, createdAt TEXT, updatedAt TEXT)", tableName);
 
         makeDatabaseCall(queryString, Function.identity());
     }
