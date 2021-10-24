@@ -41,25 +41,25 @@ public class GarbageCanController {
     }
 
     public void create(@NotNull Context context) {
+        // Making sure the user provided a valid body
+        GarbageCanCreateDto garbageCanCreateDto = context.bodyAsClass(GarbageCanCreateDto.class);
+        if (garbageCanCreateDto == null) throw new BadRequestResponse();
+
+        // Converting the create "form" to a usable database model
+        //TODO: Move this into it's own class?
+        String currentTime = LocalDateTime.now().toString();
+        GarbageCan garbageCan = new GarbageCan(
+                UUID.randomUUID().toString(),
+                garbageCanCreateDto.getLatitude(),
+                garbageCanCreateDto.getLongitude(),
+                currentTime,
+                currentTime
+        );
+
+        // Inserting the database object
+        garbageCanDao.insert(garbageCan);
+
         try {
-            // Making sure the user provided a valid body
-            GarbageCanCreateDto garbageCanCreateDto = context.bodyAsClass(GarbageCanCreateDto.class);
-            if (garbageCanCreateDto == null) throw new BadRequestResponse();
-
-            // Converting the create "form" to a usable database model
-            //TODO: Move this into it's own class?
-            String currentTime = LocalDateTime.now().toString();
-            GarbageCan garbageCan = new GarbageCan(
-                    UUID.randomUUID().toString(),
-                    garbageCanCreateDto.getLatitude(),
-                    garbageCanCreateDto.getLongitude(),
-                    currentTime,
-                    currentTime
-            );
-
-            // Inserting the database object
-            garbageCanDao.insert(garbageCan);
-
             // Storing the decoded image into a file
             byte[] decodedPhoto = Base64.getDecoder().decode(garbageCanCreateDto.getPhotoBase64());
             garbageCanImageStorage.add(garbageCan.getUuid() + ".jpg", decodedPhoto);

@@ -1,20 +1,17 @@
 package dev.earthlings.backend.javalin;
 
-import static io.javalin.apibuilder.ApiBuilder.*;
-
 import dev.earthlings.backend.controllers.GarbageCanController;
 import dev.earthlings.backend.database.dao.Dao;
 import dev.earthlings.backend.database.dao.GarbageCanPostgresDao;
-import dev.earthlings.backend.database.dao.InMemoryDao;
 import dev.earthlings.backend.database.model.GarbageCan;
 import dev.earthlings.backend.storage.FileStorage;
 import dev.earthlings.backend.storage.LocalFileStorage;
 import io.javalin.Javalin;
-import org.sql2o.GenericDatasource;
 import org.sql2o.Sql2o;
 
-import javax.sql.DataSource;
 import java.io.File;
+
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class StartupContext {
 
