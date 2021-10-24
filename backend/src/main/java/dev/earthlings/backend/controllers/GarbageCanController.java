@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Handles all routes for our backend REST api
+ *
+ * Each function is a different routes which can be found in StartupContext
+ */
 @RequiredArgsConstructor
 public class GarbageCanController {
 
@@ -46,7 +51,6 @@ public class GarbageCanController {
         if (garbageCanCreateDto == null) throw new BadRequestResponse();
 
         // Converting the create "form" to a usable database model
-        //TODO: Move this into it's own class?
         String currentTime = LocalDateTime.now().toString();
         GarbageCan garbageCan = new GarbageCan(
                 UUID.randomUUID().toString(),

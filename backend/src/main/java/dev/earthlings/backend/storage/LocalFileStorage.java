@@ -2,6 +2,9 @@ package dev.earthlings.backend.storage;
 
 import java.io.*;
 
+/**
+ * File storage used for storing images of the garbage cans
+ */
 public class LocalFileStorage implements FileStorage {
 
     private final File baseDirectory;

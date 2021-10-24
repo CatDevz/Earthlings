@@ -13,6 +13,11 @@ import java.io.File;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
+/**
+ * Handles all routes, controllers, and database setup
+ *
+ * Running on port 8080
+ */
 public class StartupContext {
 
     public void start() {

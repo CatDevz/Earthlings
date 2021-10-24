@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * Main sql database used for the backend system. Routes rely on this
+ */
 public class GarbageCanPostgresDao implements Dao<GarbageCan> {
 
     private final Sql2o sql2o;

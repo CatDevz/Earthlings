@@ -9,6 +9,10 @@ import java.util.function.Predicate;
 
 import static java.util.Collections.replaceAll;
 
+/**
+ * In memory Dao used for testing purposes
+ * @param <T> A model class, e.g GarbageCan
+ */
 public class InMemoryDao<T extends Model> implements Dao<T> {
 
     private List<T> storage = new ArrayList<>();
