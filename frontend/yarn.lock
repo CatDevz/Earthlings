@@ -2529,6 +2529,15 @@ expo-modules-core@~0.4.4:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
+expo-sensors@~11.0.3:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-11.0.3.tgz#df40d8d08531fbe543c547f12468074d51da3666"
+  integrity sha512-VTwEpB98l+pb8nML/wDFhQ18LqZ8bBDchX6HaSLdLrrtp7eYOZZ2blOa2pM8VPZa/plOPKW4iMJ3MkmZnO1f3A==
+  dependencies:
+    "@expo/config-plugins" "^4.0.2"
+    expo-modules-core "~0.4.4"
+    invariant "^2.2.4"
+
 expo-status-bar@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/expo-status-bar/-/expo-status-bar-1.1.0.tgz#b1015a69c8563b7cadcb5b6c726227397610725d"
@@ -4498,7 +4507,7 @@ prompts@^2.4.0:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -4565,6 +4574,14 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-drawer@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
+  integrity sha512-cxcQNbSWy5sbGi7anSVp6EDr6JarOBMY9lbFOeLFeVYbONiudoqRKbgEsSDgSw3/LFCLvUXK5zdjXCOedeytxQ==
+  dependencies:
+    prop-types "^15.5.8"
+    tween-functions "^1.0.1"
 
 react-native-maps@0.28.0:
   version "0.28.0"
@@ -5390,6 +5407,11 @@ tslib@^2.0.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+
+tween-functions@^1.0.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tween-functions/-/tween-functions-1.2.0.tgz#1ae3a50e7c60bb3def774eac707acbca73bbc3ff"
+  integrity sha1-GuOlDnxguz3vd06scHrLynO7w/8=
 
 type-fest@^0.7.1:
   version "0.7.1"

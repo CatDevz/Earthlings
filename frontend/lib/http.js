@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://db41-198-54-134-125.ngrok.io";
+export const BASE_URL = "http://pingmc.app:8000";
 
 const http = axios.create({
   baseURL: BASE_URL,
