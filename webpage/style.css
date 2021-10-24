@@ -29,12 +29,9 @@
       format("opentype");
   }
 
-  /******************************************************************************
-  END Glitch hello-app default styles
-  ******************************************************************************/
   
   body {
-    font-family: HK Grotesk;
+    font-family: Garamond;
     background-color: var(--color-bg);
   }
   
@@ -55,6 +52,6 @@
 
   /* Subheading */
   h2 {
-    color: #2800FF;
+    color: #000000;
   }
   
