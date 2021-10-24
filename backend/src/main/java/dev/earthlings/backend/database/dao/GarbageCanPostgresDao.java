@@ -66,13 +66,9 @@ public class GarbageCanPostgresDao implements Dao<GarbageCan> {
     }
 
     private void makeDatabaseCall(String queryString, Function<Query, Query> function) {
-        try {
-            Connection connection = sql2o.open();
-            connection.setRollbackOnException(false);
+        try (Connection connection = sql2o.open()) {
             Query query = function.apply(connection.createQuery(queryString));
             query.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
